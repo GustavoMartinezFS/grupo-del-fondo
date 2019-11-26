@@ -1,0 +1,73 @@
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: white;
+	font-family: helvetica;
+	color: #444;
+}
+
+/* Container */
+.container {
+	width: 1140px;
+	margin: 0 auto;
+}
+
+/* Header */
+header {
+	width: 1140px;
+	margin-bottom: 20px;
+	z-index: 999;
+}
+.logo {
+	float:left;
+	margin-right: 30px;
+  width: auto;
+  height: 10%;
+  padding-right: 25%;
+}
+.main-nav {
+	background-color: #4d4d4d;
+	padding: 12px 15px;
+	overflow: hidden;
+}
+.main-nav li a {
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #ff7442;
+}
+.menu {
+	float: left;
+	overflow: hidden;
+  margin-top: 2%;
+}
+.main-nav li {
+	float: left;
+	margin-right: 30px;
+	line-height: 39px; /* Debe coincidir con la altura del logo */
+}
+.main-nav li a:hover{
+	text-decoration: underline;
+}
+.acceso{
+	float: right;
+  margin-top: 1%;
+}
+.acceso li {
+	margin-right: 0;
+	margin-left: 15px;
+}
+
+.icono{
+  width: 4%;
+  height: auto;
+  margin-top: 0.5%;
+  margin-left: 2%;
+}
+
+.icono_2 {
+  width: 4%;
+  height: auto;
+}
