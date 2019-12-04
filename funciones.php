@@ -2,60 +2,49 @@
 // validacion
 $errores = array();
 
-// function validar_nombre(){
-if ($_POST) {
-  if (strlen($_POST["nombre"]) == 0){
-    $errores[] = "No completaste el nombre <br>";
-  }
-}
-// }
-
-// function validar_apellido() {
-if ($_POST) {
-  if (strlen($_POST["apellido"]) < 2){
-    $errores[] = "No completaste el apellido <br>";
-  }
-}
-// }
-
-// function validar_email() {
-if ($_POST) {
-  if (strlen($_POST["email"]) == 0){
-    $errores[] = "No completaste el email <br>";
-    // echo "No llenaste el email <br>";
+function validar(){
+  if ($_POST){
+    if (strlen($_POST["nombre"]) == 0){
+      $errores[] = "No llenaste el nombre URA <br>";
     }
-    if (filter_var($_POST["email"], FILTER_VALIDATE_EMAIL) == false) {
-      $errores[] = "El mail no tiene el formato correcto <br>";
-
-
-  }
-}
-// }
-
-// function validar_pass() {
-  if ($_POST) {
-    if (strlen($_POST["pass"]) < 5) {
-      $errores[] = "La contraseña debe tener almenos 5 caracteres <br>";
+    if (strlen($_POST["apellido"]) < 2){
+      $errores[] = "Que son OCHO caracteres herrrrmano <br>";
+    }
+    if (strlen($_POST["email"]) == 0){
+      $errores[] = "No llenaste el email <br>";
+      }
+    if (filter_var($_POST["email"], FILTER_VALIDATE_EMAIL) == false){
+        $errores[] = "El mail no tiene el formato correcto <br>";
+    }
+    if (strlen($_POST["pass"]) < 5){
+        $errores[] = "La contraseña debe tener almenos 5 caracteres <br>";
+    }
+    if (($_POST["repass"]) != ($_POST["pass"])){
+        $errores[] = "Las contraseñas no coinciden <br>";
+    }
+    if (!$errores){
+      if(verificar()){
+      crear();
+      header("Location:perfilusuario.php");
+      }
     }
   }
-// }
-
-// function validar_repass() {
-  if ($_POST) {
-    if (($_POST["repass"]) != ($_POST["pass"])) {
-      $errores[] = "Las contraseñas no coinciden <br>";
-    }
-  }
-// }
-
-// registro exitoso = perfilusuario
-if ($_POST) {
-  if (!$errores){
-    crear();
-    header("Location:perfilusuario.php"); exit;
-  }
 }
+function verificar(){
 
+$array = file_get_contents("usuarios.json");
+
+if(!empty($usuarios)){
+$usuarios = json_decode($array, true);
+};
+
+if (condition) {
+  # code...
+}$array["usuarios"][] = $miArray;
+
+$ajson = json_encode($usuarios, true);
+
+}
 
 
 // creacion usuarios
@@ -68,7 +57,7 @@ $miArray = ["nombre" => $_POST["nombre"],
             "pass" => password_hash($_POST["pass"], PASSWORD_DEFAULT)
           ];
 
-$usuarios = file_get_contents("usuarios.json");
+$usuarios = file_get_contents("usuarios.txt");
 
 if(!empty($usuarios)){
   $usuarios = json_decode($usuarios, true);
@@ -78,7 +67,7 @@ $usuarios["usuarios"][] = $miArray;
 
 $ajson = json_encode($usuarios, true);
 
-file_put_contents("usuarios.json", $ajson);
+file_put_contents("usuarios.txt", $ajson, FILE_APPEND);
 
 }
 
@@ -107,37 +96,30 @@ if ($_POST) {
 // //
 //
 // // Se valida usuario y contraseña
-    //   PERO NO ESTARIA FUNCIONANDO JEJE SALUDOS
-
-function log_in(){
-
-if (!empty($_POST)) {
-  $user = $_POST["email"];
-  $pass = $_POST["pass"];
-
-    $usuarios = file_get_contents("usuarios.json");
-    $miArray = json_decode($usuarios, true);
-
-    foreach ($miArray["usuarios"] as $key => $value) {
-      if ( $value["email"] == $user) {
-        if (password_verify("$pass", $value["pass"])) {
-          header("Location:perfilusuario.php");
-        }else {
-          echo "Contraseña incorrecta <br>";
-          break;
-        }
-      }
-    }
-  }
-};
-// //
-// //
+//     //   PERO NO ESTARIA FUNCIONANDO JEJE SALUDOS
+// if (!empty($_POST)) {
+//   $user = $_POST["email"];
+//   $pass = $_POST["pass"];
+// }
+//     $usuarios = file_get_contents("usuarios.txt");
+//     $miArray = json_decode($usuarios, true);
 //
+//     foreach ($miArray["usuarios"] as $key => $value) {
+//       if ( $value["usuario"] == "vir") {
+//         if (password_verify("12345", $value["pass"])) {
+//           echo "Bienvenido" . $value["nombre"];
+//           echo "<br>";
+//         }else {
+//           echo "Contraseña incorrecta <br>";
+//         }
+//       }
+//     }
+//
+//
+
 
 //<?php
 
-
-//Foto de perfil de #usuario
 
 if($_FILES){
 
@@ -151,14 +133,6 @@ if($_FILES){
       }else {
         move_uploaded_file($_FILES["foto_perfil"]["tmp_name"], "files/fotoperfil." . $ext);
       }
-}
-
-
-//datos perfilusuario
-
-function datos_user(){
-  session_start();
-
 }
 
 
