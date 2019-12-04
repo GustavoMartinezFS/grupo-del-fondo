@@ -1,8 +1,8 @@
 <?php
 // validacion
-$errores = array();
 
 function validar(){
+  $errores = array();
   if ($_POST){
     if (strlen($_POST["nombre"]) == 0){
       $errores[] = "No llenaste el nombre URA <br>";
@@ -23,29 +23,21 @@ function validar(){
         $errores[] = "Las contraseñas no coinciden <br>";
     }
     if (!$errores){
-      if(verificar()){
       crear();
       header("Location:perfilusuario.php");
-      }
+    }else {
+      return $errores;
     }
   }
 }
+
 function verificar(){
+  $array = file_get_contents("usuarios.json");
 
-$array = file_get_contents("usuarios.json");
-
-if(!empty($usuarios)){
-$usuarios = json_decode($array, true);
-};
-
-if (condition) {
-  # code...
-}$array["usuarios"][] = $miArray;
-
-$ajson = json_encode($usuarios, true);
-
+  if(!empty($usuarios)){
+    $usuarios = json_decode($array, true);
+  }
 }
-
 
 // creacion usuarios
 
@@ -62,7 +54,7 @@ $usuarios = file_get_contents("usuarios.json");
 
 if(!empty($usuarios)){
   $usuarios = json_decode($usuarios, true);
-};
+}
 
 $usuarios["usuarios"][] = $miArray;
 
@@ -72,17 +64,14 @@ file_put_contents("usuarios.txt", $ajson, FILE_APPEND);
 }
 
 // persistencia
-
-$email = "";
-$nombre = "";
-$apellido = "";
-
-if ($_POST) {
-
-  $email = $_POST ["email"];
-  $nombre = $_POST ["nombre"];
-  $apellido = $_POST ["apellido"];
-  }
+$nombre="";
+$apellido="";
+$email="";
+if ($_POST){
+  $email = (isset($_POST ["email"]))? $_POST ["email"] : "" ;
+  $nombre = (isset($_POST ["nombre"]))? $_POST ["email"] : "" ;
+  $apellido = (isset($_POST ["apellido"]))? $_POST ["email"] : "" ;
+}
 
 // //
 //
@@ -117,15 +106,15 @@ if($_FILES){
       if ($ext != "jpeg" && $ext != "jpg" && $ext != "png") {
         echo "Su foto de perfil debe ser .jpeg, .jpg o .png <br>";
       }else {
-        move_uploaded_file($_FILES["foto_perfil"]["tmp_name"], "files/fotoperfil." . $ext);
+        move_uploaded_file($_FILES["foto_perfil"]["tmp_name"], "images/usuarios/fotoperfil." . $ext);
       }
 }
 
-
-// datos perfilusuario
-función  datos_user () {
-  session_start ();
-}
+//
+// // datos perfilusuario
+// función  datos_user () {
+//   session_start ();
+// }
 
 
 

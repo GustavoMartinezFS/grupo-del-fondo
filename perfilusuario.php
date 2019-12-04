@@ -38,9 +38,9 @@
                  <div class="container">
                    <div class="row">
                      <div class="col-md-4" >
-                       <img src= "<?php if($_FILES): echo "files/fotoperfil." .pathinfo($_FILES["foto_perfil"]["name"], PATHINFO_EXTENSION);?>
+                       <img src= "<?php if($_FILES): echo "images/usuarios/fotoperfil." .pathinfo($_FILES["foto_perfil"]["name"], PATHINFO_EXTENSION);?>
                       <?php else: ?>
-                        images/lusuario.png
+                        images/iconos/lusuario.png
                       <?php endif; ?>
                          "
                         class="rounded" alt="image user" style="max-width: 150px;">

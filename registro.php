@@ -1,4 +1,8 @@
-<?php require_once("funciones.php"); ?>
+<?php
+require_once("funciones.php");
+$errores= validar();
+
+?>
 
  <!DOCTYPE html>
  <html lang="es">
