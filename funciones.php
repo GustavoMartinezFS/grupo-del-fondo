@@ -51,13 +51,14 @@ $ajson = json_encode($usuarios, true);
 
 function crear(){
 
-$miArray = ["nombre" => $_POST["nombre"],
-            "apellido" => $_POST["apellido"],
-            "email" => $_POST["email"],
-            "pass" => password_hash($_POST["pass"], PASSWORD_DEFAULT)
-          ];
+$miArray = [
+  "nombre" => $_POST["nombre"],
+  "apellido" => $_POST["apellido"],
+  "email" => $_POST["email"],
+  "pass" => password_hash($_POST["pass"], PASSWORD_DEFAULT)
+];
 
-$usuarios = file_get_contents("usuarios.txt");
+$usuarios = file_get_contents("usuarios.json");
 
 if(!empty($usuarios)){
   $usuarios = json_decode($usuarios, true);
@@ -68,17 +69,7 @@ $usuarios["usuarios"][] = $miArray;
 $ajson = json_encode($usuarios, true);
 
 file_put_contents("usuarios.txt", $ajson, FILE_APPEND);
-
 }
-
-
-// Se registró correctamente y va a su perfil - no se por que no funcionaaaaaa
-//
-// if (){
-//   header("Location:perfilusuario.php");exit;
-// }
-
-
 
 // persistencia
 
@@ -95,31 +86,26 @@ if ($_POST) {
 
 // //
 //
-// // Se valida usuario y contraseña
-//     //   PERO NO ESTARIA FUNCIONANDO JEJE SALUDOS
-// if (!empty($_POST)) {
-//   $user = $_POST["email"];
-//   $pass = $_POST["pass"];
-// }
-//     $usuarios = file_get_contents("usuarios.txt");
-//     $miArray = json_decode($usuarios, true);
-//
-//     foreach ($miArray["usuarios"] as $key => $value) {
-//       if ( $value["usuario"] == "vir") {
-//         if (password_verify("12345", $value["pass"])) {
-//           echo "Bienvenido" . $value["nombre"];
-//           echo "<br>";
-//         }else {
-//           echo "Contraseña incorrecta <br>";
-//         }
-//       }
-//     }
-//
-//
+function log_in(){
+if (!empty($_POST)) {
+  $user = $_POST["email"];
+  $pass = $_POST["pass"];
+    $usuarios = file_get_contents("usuarios.json");
+    $miArray = json_decode($usuarios, true);
+    foreach ($miArray["usuarios"] as $key => $value) {
+      if ( $value["email"] == $user) {
+        if (password_verify("$pass", $value["pass"])) {
+          header("Location:perfilusuario.php");
+        }else {
+          echo "Contraseña incorrecta <br>";
+          break;
+        }
+      }
+    }
+  }
+}
 
-
-//<?php
-
+// Foto de perfil de #usuario
 
 if($_FILES){
 
@@ -133,6 +119,12 @@ if($_FILES){
       }else {
         move_uploaded_file($_FILES["foto_perfil"]["tmp_name"], "files/fotoperfil." . $ext);
       }
+}
+
+
+// datos perfilusuario
+función  datos_user () {
+  session_start ();
 }
 
 
