@@ -1,9 +1,10 @@
 <?php require_once("funciones.php");
-    if (validarLogin()) {
-        redordarUsuario();
+if (!empty($_POST)) {
       if (recorrerBDBuscandoUsuario(abrirJson(), guardarInfoUsuario())){
+        redordarUsuario();
         header('Location: perfilusuario.php');exit;
-      } }
+      }
+}
  ?>
 
  <!DOCTYPE html>
@@ -13,7 +14,7 @@
 
  <body>
 
-   <?php include_once("header.php"); ?>
+ <?php include_once("header.php"); ?>
 
 <!-- Main -->
     <main role="main"  style="margin-top: 40px;">
@@ -32,20 +33,11 @@
                                     if (isset($_COOKIE['email'])) {
                                         echo "value='".$_COOKIE['email']."' ";
                                     }
-                                    elseif (isset($_SESSION['exito']['email'])) {
-                                        echo "value='".$_SESSION['exito']['email']."' ";
+                                    elseif (isset($_SESSION['exito'])) {
+                                        echo "value='".$_SESSION['exito']."' ";
                                     }
                             ?> id="exampleInputEmail1"
                                     aria-describedby="emailHelp"></span>
-                        </div>
-                        <div class="bg-new">
-                          <?php
-                                if(isset($_SESSION['error']['email'])){
-                                    if ($_SESSION['error']['email'] != "") {
-                                        echo '<span class="messagerror">'.$_SESSION['error']['email'].'</span>';
-                                    }
-                                }
-                            ?>
                         </div>
                         <br>
 
@@ -55,20 +47,15 @@
                                     if (isset($_COOKIE['password'])) {
                                         echo "value='".$_COOKIE['password']."' ";
                                     }
-                                    elseif (isset($_SESSION['exito']['password'])) {
-                                        echo "value='".$_SESSION['exito']['password']."' ";
-                                    }
                             ?> class="form-control col-12"
                                     id="exampleInputPassword1"></span>
                         </div>
                         <div class="bg-new">
                           <?php
-                            if(isset($_SESSION['error']['password'])){
-                                if ($_SESSION['error']['password'] != "") {
-                                    echo '<span class="messagerror">'.$_SESSION['error']['password'].'</span>';
-                                }
-                            }
-                        ?>
+                          if (isset($_SESSION["error"]["returnsearch"])) {
+                            echo $_SESSION["error"]["returnsearch"];
+                          }
+                          ?>
                         </div>
                         <br>
 

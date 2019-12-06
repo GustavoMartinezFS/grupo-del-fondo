@@ -45,16 +45,13 @@ function validar(){
     }
   }
 }
-
 function verificar(){
   $array = file_get_contents("array.json");
   if(!empty($usuarios)){
     $usuarios = json_decode($array, true);
   }
 }
-
 // creacion usuarios
-
 function crear(){
 
 $usuarioNuevo = [
@@ -123,61 +120,55 @@ function foto(){
   }
 }
 session_start();
-
-// desde aqui es algo nuevo
-function validarLogin(){
-
-	if (!empty($_POST)) {
-    $_SESSION['error']['email'] = "";
-    $_SESSION['error']['password'] = "";
-    if(strlen($_POST['email']) == 0) {
-      $_SESSION['error']['email'] = "El email no puede estar vacío<br>";
-      }elseif(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-        $_SESSION['error']['email'] = "El email ingresado no es válido<br>";
-        }else{
-          $_SESSION['exito']['email'] = $_POST['email'];
-          }
-          if(strlen($_POST['password']) == 0) {
-            $_SESSION['error']['password'] = "La contraseña no puede estar vacía<br>";
-          } elseif(strlen($_POST['password']) < 5) {
-            $_SESSION['error']['password'] = "La contraseña no puede ser menor a 5<br>";
-            }else{
-              $_SESSION['exito']['password'] = $_POST['password'];
-              }
-              if($_SESSION['error']['email'] == "" && $_SESSION['error']['password'] == ""){
-                return true;
-              } else{
-                header('Location: login.php');
-              }
-  }
-}
+//
+// // desde aqui es algo nuevo
+// function validarLogin(){
+//
+// 	if (!empty($_POST)) {
+//     $_SESSION['error']['email'] = "";
+//     $_SESSION['error']['password'] = "";
+//     if(strlen($_POST['email']) == 0) {
+//       $_SESSION['error']['email'] = "El email no puede estar vacío<br>";
+//       }elseif(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+//         $_SESSION['error']['email'] = "El email ingresado no es válido<br>";
+//         }else{
+//           $_SESSION['exito']['email'] = $_POST['email'];
+//           }
+//           if(strlen($_POST['password']) == 0) {
+//             $_SESSION['error']['password'] = "La contraseña no puede estar vacía<br>";
+//           } elseif(strlen($_POST['password']) < 5) {
+//             $_SESSION['error']['password'] = "La contraseña no puede ser menor a 5<br>";
+//             }else{
+//               $_SESSION['exito']['password'] = $_POST['password'];
+//               }
+//               if($_SESSION['error']['email'] == "" && $_SESSION['error']['password'] == ""){
+//                 return true;
+//               } else{
+//                 header('Location: login.php');
+//               }
+//   }
+// }
 
 function redordarUsuario(){
     if (!empty($_POST['recordarUsuario'])) {
-        $cookie_email = "email";
-        $cookie_emailvalue = $_POST['email'];
-        setcookie($cookie_email, $cookie_emailvalue, time()+604800);
-        $cookie_password = "password";
-        $cookie_passwordvalue = $_POST['password'];
-        setcookie($cookie_password, $cookie_passwordvalue, time()+604800);
-        header('Location: login.php');
+        setcookie("email", $_POST['email'], time()+604800);
+        setcookie("password", $_POST['password'], time()+604800);
     } elseif(isset($_COOKIE['email'])){
         setcookie('email',"",time()-604800);
         setcookie('password',"",time()-604800);
-        header('Location: login.php');
     }
 }
 
 function guardarInfoUsuario(){
     // Si se envían datos por el método POST se guarda la información en variables
     if ($_POST) {
-       $useremail = $_POST['email'];
-       $userpassword = $_POST['password'];
+       $email = $_POST['email'];
+       $password = $_POST['password'];
     };
     // Se crea la variable a guardar en la base de datos con la información recibida
     $nuevousuario = [
-        'email' => $useremail,
-        'password' => $userpassword,
+        'email' => $email,
+        'password' => $password,
     ];
     return $nuevousuario;
 }
@@ -202,11 +193,11 @@ function recorrerBDBuscandoUsuario($usersJsonDecode, $nuevousuario){
   if ($flagemail && $flagpassword) {
     $_SESSION['exito'] = $nuevousuario['email'];
     return true;
-  }elseif($flagpassword){
-    $_SESSION['error']['returnsearch'] = "<br><br>Contraseña incorrecta";
+  }elseif($flagemail){
+    $_SESSION['error']['returnsearch'] = "Contraseña incorrecta!";
     header('Location: login.php');
 	} else{
-	  $_SESSION['error']['returnsearch'] = "<br><br>El usuario no existe";
+	  $_SESSION['error']['returnsearch'] = "El usuario no existe! Debes registrarte primero. ";
 	  header('Location: login.php');
 	}
 }
