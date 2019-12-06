@@ -34,7 +34,7 @@ function validar(){
     }
     if (!$errores){
       crear();
-      header("Location:perfilusuario.php");
+      header("Location:login.php");
     }else {
       $array =[
         "errores"=>$errores,
@@ -47,8 +47,7 @@ function validar(){
 }
 
 function verificar(){
-  $array = file_get_contents("usuarios.json");
-
+  $array = file_get_contents("array.json");
   if(!empty($usuarios)){
     $usuarios = json_decode($array, true);
   }
@@ -84,40 +83,43 @@ file_put_contents("array.json", $ajson);
 //   $nombre = (isset($_POST ["nombre"]))? $_POST ["nombre"] : "" ;
 // }
 
+// // //
 // //
-//
-function login(){
-  if (!empty($_POST)) {
-    $user = $_POST["email"];
-    $pass = $_POST["password"];
-    $usuarios = file_get_contents("array.json");
-    $miArray = json_decode($usuarios, true);
-    foreach ($miArray["usuarios"] as $key => $value){
-      if($value["email"] == $user){
-        if(password_verify("$pass", $value["pass"])){
-          header("Location:perfilusuario.php");
-        }else{
-          echo "Contraseña incorrecta <br>";
-          return;
-        }
-      }
-    }
-    echo "Correo no registrado.";
-  }
-}
+// function login(){
+//   if (!empty($_POST)) {
+//     $user = $_POST["email"];
+//     $pass = $_POST["password"];
+//     $usuarios = file_get_contents("array.json");
+//     $miArray = json_decode($usuarios, true);
+//     foreach ($miArray["usuarios"] as $key => $value){
+//       if($value["email"] == $user){
+//         if(password_verify("$pass", $value["pass"])){
+//           header("Location:perfilusuario.php");
+//         }else{
+//           echo "Contraseña incorrecta <br>";
+//           return;
+//         }
+//       }
+//     }
+//     echo "Correo no registrado.";
+//   }
+// }
 
 // Foto de perfil de #usuario
-
-if($_FILES){
-  if($_FILES["foto_perfil"]["error"] !=0){
-    echo "Hubo un error al cargar su foto de perfil <br>";
-  }else{
-    $ext = pathinfo($_FILES["foto_perfil"]["name"], PATHINFO_EXTENSION);
-  }
-  if($ext != "jpeg" && $ext != "jpg" && $ext != "png"){
-    echo "Su foto de perfil debe ser .jpeg, .jpg o .png <br>";
-  }else{
-    move_uploaded_file($_FILES["foto_perfil"]["tmp_name"], "images/usuarios/fotoperfil." . $ext);
+function foto(){
+  if($_FILES){
+    if($_FILES["foto_perfil"]["error"] !=0){
+      return "Hubo un error al cargar su foto de perfil <br>";
+    }else{
+      $ext = pathinfo($_FILES["foto_perfil"]["name"], PATHINFO_EXTENSION);
+    }
+    if($ext != "jpeg" && $ext != "jpg" && $ext != "png"){
+      return "Su foto de perfil debe ser .jpeg, .jpg o .png <br>";
+    }else{
+      $_FILES["ok"]="ok";
+      move_uploaded_file($_FILES["foto_perfil"]["tmp_name"], "images/usuarios/fotoperfil." . $ext);
+      return "";
+    }
   }
 }
 session_start();
@@ -125,34 +127,30 @@ session_start();
 // desde aqui es algo nuevo
 function validarLogin(){
 
-	if ($_POST) {
-
-            $_SESSION['error']['email'] = "";
-            $_SESSION['error']['password'] = "";
-
-            if(strlen($_POST['email']) == 0) {
-                $_SESSION['error']['email'] = "El email no puede estar vacío<br>";
-            } elseif(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-                $_SESSION['error']['email'] = "El email ingresado no es válido<br>";
+	if (!empty($_POST)) {
+    $_SESSION['error']['email'] = "";
+    $_SESSION['error']['password'] = "";
+    if(strlen($_POST['email']) == 0) {
+      $_SESSION['error']['email'] = "El email no puede estar vacío<br>";
+      }elseif(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+        $_SESSION['error']['email'] = "El email ingresado no es válido<br>";
+        }else{
+          $_SESSION['exito']['email'] = $_POST['email'];
+          }
+          if(strlen($_POST['password']) == 0) {
+            $_SESSION['error']['password'] = "La contraseña no puede estar vacía<br>";
+          } elseif(strlen($_POST['password']) < 5) {
+            $_SESSION['error']['password'] = "La contraseña no puede ser menor a 5<br>";
             }else{
-                $_SESSION['completarCorrectos']['email'] = $_POST['email'];
-            };
-
-            if(strlen($_POST['password']) == 0) {
-                $_SESSION['error']['password'] = "La contraseña no puede estar vacía<br>";
-            } elseif(strlen($_POST['password']) < 5) {
-                $_SESSION['error']['password'] = "La contraseña no puede ser menor a 5<br>";
-            }else{
-                $_SESSION['completarCorrectos']['password'] = $_POST['password'];
-            };
-
-            if($_SESSION['error']['email'] == "" && $_SESSION['error']['password'] == ""){
+              $_SESSION['exito']['password'] = $_POST['password'];
+              }
+              if($_SESSION['error']['email'] == "" && $_SESSION['error']['password'] == ""){
                 return true;
-            } else{
+              } else{
                 header('Location: login.php');
-            }
-        }
-    }
+              }
+  }
+}
 
 function redordarUsuario(){
     if (!empty($_POST['recordarUsuario'])) {

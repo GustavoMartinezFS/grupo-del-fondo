@@ -1,4 +1,5 @@
-<?php require_once("funciones.php"); ?>
+<?php require_once("funciones.php");
+ ?>
 
  <!DOCTYPE html>
  <html lang="es">
@@ -13,7 +14,9 @@
    <div class="container">
      <div class="row">
        <div class="col-md-12" ></div>
-       <h2>Bienvenido #Usuario!</h2>
+       <h2>Bienvenido <?php if (isset($_SESSION["exito"])) {
+         echo $_SESSION['exito'];
+        }?></h2>
      </div>
    </div>
  </div>
@@ -53,15 +56,14 @@
                          <div class="">
                            <input type="submit" name="enviar_foto" value="Subir">
                          </div>
+                         <?=foto() ?>
 
 
                      </form>
                      </div>
                      <div class="col-md-8">
                          <h5><b>Información del usuario</b></h5>
-                           <p>*usuario* <br> *email*</p>
-                         <h5><b>Libreta de direcciones</b></h5>
-                           <p>* <br> * <br> * </p>
+                           <p>email: <?=$_SESSION['exito']?></p>
 
                      </div>
                    </div>

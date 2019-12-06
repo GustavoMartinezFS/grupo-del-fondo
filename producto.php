@@ -1,6 +1,7 @@
 <?php
 $productosj= file_get_contents("productos.json");
 $productos= json_decode($productosj,true);
+ session_start(); 
 
 //para agregar nuevos productos!
 // $productos[]=[

@@ -22,14 +22,27 @@
                     <a class="nav-link" href="ayuda.php">Ayuda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="registro.php">Registro</a>
+                    <a <?php if (isset($_SESSION['exito'])) {
+                      echo "hidden";
+                    } ?> class="nav-link" href="registro.php">Registro</a>
                 </li>
+                <a <?php if (!isset($_SESSION['exito'])) {
+                  echo "hidden";
+                } ?> class="nav-link" href="perfilusuario.php">Perfil</a>
+            </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login </a>
+                    <a <?php if (isset($_SESSION['exito'])) {
+                      echo "hidden";
+                    } ?> class="nav-link" href="login.php">Login </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="contacto.php">Contacto</a>
                 </li>
+              </li>
+              <a <?php if (!isset($_SESSION['exito'])) {
+                echo "hidden";
+              } ?> class="nav-link" href="destroy.php">Salir</a>
+          </li>
             </ul>
         </div>
     </nav>
