@@ -1,4 +1,9 @@
-<?php require_once("funciones.php"); ?>
+<?php require_once("funciones.php");
+if (!isset($_SESSION["exito"])) {
+  header("Location:login.php");
+  exit;
+}
+ ?>
 
 <!DOCTYPE html>
 <html lang="es">

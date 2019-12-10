@@ -53,24 +53,18 @@ function verificar(){
 }
 // creacion usuarios
 function crear(){
-
-$usuarioNuevo = [
-  "nombre" => $_POST["nombre"],
-  "email" => $_POST["email"],
-  "pass" => password_hash($_POST["pass"], PASSWORD_DEFAULT)
-];
-
-$json = file_get_contents("array.json");
-
-if(!empty($json)){
-  $array = json_decode($json, true);
-}
-
-$array["usuarios"][] = $usuarioNuevo;
-
-$ajson = json_encode($array,true);
-
-file_put_contents("array.json", $ajson);
+  $usuarioNuevo = [
+    "nombre" => $_POST["nombre"],
+    "email" => $_POST["email"],
+    "pass" => password_hash($_POST["pass"], PASSWORD_DEFAULT)
+  ];
+  $json = file_get_contents("prueba.json");
+  if(!empty($json)){
+    $array = json_decode($json, true);
+  }
+  //$array["usuarios"][] = $usuarioNuevo;
+  $ajson = json_encode($usuarioNuevo);
+  file_put_contents("prueba.json", $ajson, FILE_APPEND);
 }
 
 // // persistencia
