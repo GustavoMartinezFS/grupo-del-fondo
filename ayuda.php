@@ -99,7 +99,7 @@
         </div>
       </div>
       <h4>Te sivió la información?</h4>
-      <form>
+      <form action="index.php">
         <fieldset class="form-group">
           <div class="row">
             <div class="col-sm-12">

@@ -1,5 +1,7 @@
 <?php
 require_once("funciones.php");
+include("conexion.php");
+
 $array= validar();
 
 ?>
@@ -7,7 +9,7 @@ $array= validar();
  <!DOCTYPE html>
  <html lang="es">
 
- <?php include_once("head.php"); ?>
+  <?php include_once("head.php"); ?>
 
  <body>
 
@@ -26,15 +28,11 @@ $array= validar();
 
                         <div class="form-group column d-flex flex-column">
                             <label for="nombre">Nombre completo</label>
-                            <span class="row"><input type="text" class="form-control col-12" value="<?=$array["nombre"]?>" name="nombre" required placeholder=" Escribe aqui tu nombre completo " id="Ingresá tu nombre"
+                            <span class="row"><input type="text" class="form-control col-12" value="" name="nombre" required placeholder=" Escribe aqui tu nombre completo " id="Ingresá tu nombre"
                                     aria-describedby="emailHelp"></span>
                         </div>
                         <div class="bg-new">
-                          <?php
-                          if(isset($array["errores"]["nnombre"])){
-                            echo $array["errores"]["nnombre"];
-                          }
-                          if(isset($array["errores"]["nombre"])){
+                          <?php if(isset($array["errores"]["nombre"])){
                             echo $array["errores"]["nombre"];
                           } ?>
                         </div>
@@ -42,8 +40,7 @@ $array= validar();
 
                         <div class="form-group column d-flex flex-column">
                             <label for="email">Correo electronico</label>
-                            <span class="row"><input type="email" placeholder=" Escribe aqui tu correo electronico " required value="<?=$array["email"]?>" name="email" class="form-control col-12" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp"></span>
+                            <span class="row"><input type="email" placeholder=" Escribe aqui tu correo electronico " required value="" name="email" class="form-control col-12" aria-describedby="emailHelp"></span>
                         </div>
                         <div class="bg-new">
                           <?php if(isset($array["errores"]["email"])){echo $array["errores"]["email"];}
@@ -70,16 +67,6 @@ $array= validar();
                           <?php if(isset($array["errores"]["repass"])){echo $array["errores"]["repass"];} ?>
                         </div>
                         <br>
-<!--
-                        <?php if (isset($errores)): ?>
-                          <ul class="errores" style="list-style:none">
-                            <?php foreach ($errores as $error) {
-                              echo "<li>" . $error . "<li>";
-                            }
-                            ?>
-                          </ul>
-                        <?php endif; ?> -->
-
                         <div class="btn bg-new col-md-6">
                           <input type="submit" name="enviar" value="Enviar" class="btn bg-new col-md-6">
                         </div>

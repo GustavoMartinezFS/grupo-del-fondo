@@ -1,6 +1,6 @@
 <?php require_once("funciones.php");
 if (!empty($_POST)) {
-      if (recorrerBDBuscandoUsuario(abrirJson(), guardarInfoUsuario())){
+      if (recorrerBDBuscandoUsuario()){
         redordarUsuario();
         header('Location: perfilusuario.php');exit;
       }

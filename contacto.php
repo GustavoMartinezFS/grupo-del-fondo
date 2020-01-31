@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php
+require_once("funciones.php"); ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -15,35 +16,36 @@
             </div>
             <div class="row">
                 <div class="col-md-8 mx-auto">
-                    <form class="text-left mb-3">
+                    <form  action="" method="post" class="text-left mb-3">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Nombre:</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1"
-                                aria-describedby="emailHelp">
+                            <label for="nombre">Nombre:</label>
+                            <input required type="text" class="form-control" name="nombre">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Telefono:</label>
-                            <input type="telephone" class="form-control" id="exampleInputPassword1">
+                            <label for="tel">Telefono:</label>
+                            <input required type="tel" class="form-control" name="tel" >
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Dirección:</label>
-                            <input type="telephone" class="form-control" id="exampleInputPassword1">
+                            <label for="dir">Dirección:</label>
+                            <input required type="text" class="form-control" name="dir">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email:</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                aria-describedby="emailHelp">
+                            <label for="email">Email:</label>
+                            <input required type="email" class="form-control" name="email" >
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Consulta:</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                style="resize: none;"></textarea>
+                            <label for="msje">Consulta:</label>
+                            <textarea required class="form-control" name="msje" style="resize: none;"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Enviar</button>
+                        <br> <br>
+                        <?php correo(); ?>
+
                     </form>
                 </div>
             </div>
         </section>
+
     </main>
 
     <?php include_once("footer.php"); ?>

@@ -1,8 +1,7 @@
-<?php require_once("funciones.php");
-//if (!isset($_SESSION["exito"])) {
-//  header("Location:login.php");
-//  exit;
-//}
+<?php
+ require_once("funciones.php");
+ include_once("conexion.php");
+
  ?>
 
 <!DOCTYPE html>
@@ -12,14 +11,15 @@
 
 <body>
 
-  <?php include_once("header.php"); ?>
+  <?php include_once("header.php");?>
 
 <!-- Main -->
-  <main role="main" style="margin-top: 90px;">
-    <h1 style="text-align: left;">Agregar producto</h1>
-    <button type="submit" class="btn bg-new col-2"><a style="color: white;"href="index.php">Agregar</a></button>
+  <main style="margin:90px;">
+  <h1>PAGINA EN CONSTRUCCION</h1>
+  <p>DISCULPE LAS MOLESTIAS</p>
+  <p><a href="perfilusuario.php">VOLVER</a> </p>
   </main>
-  
+
   <?php include_once("footer.php"); ?>
 
 

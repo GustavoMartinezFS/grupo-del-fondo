@@ -1,20 +1,6 @@
 <?php
-$productosj= file_get_contents("productos.json");
-$productos= json_decode($productosj,true);
- session_start(); 
-
-//para agregar nuevos productos!
-// $productos[]=[
-//     "src"=>"",
-//     "alt"=>"",
-//     "titulo" => "",
-//     "precio" => "",
-//     "stock" => "",
-//     "detalle" => ""
-// ];
-// $productonuevo = json_encode($productos);
-// file_put_contents("usuarios.json",$productonuevo);
- ?>
+  session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -44,12 +30,12 @@ $productos= json_decode($productosj,true);
                         </div>
                     </div>
                     <div class="col-md-12" style="padding:20px; display: flex; justify-content: space-around;">
-                        <a class="btn btn-lg btn-secondary" style="font-size: 0.8em; width: 33%;" href="inicio.html"
+                        <a class="btn btn-lg btn-secondary" style="font-size: 0.8em; width: 33%;" href="index.php"
                             role="button">COMPRAR</a>
-                        <a class="btn btn-lg btn-primary" style="font-size: 0.8em; width: 33%;" href="carrito.html"
+                        <a class="btn btn-lg btn-primary" style="font-size: 0.8em; width: 33%;" href="carrito.php"
                             role="button">AGREGAR AL CARRITO</a>
                         <a class="btn btn-lg btn-information"
-                            style="font-size: 0.8em; width: 33%; box-shadow: black 1px 1px 3px;" href="index.html"
+                            style="font-size: 0.8em; width: 33%; box-shadow: black 1px 1px 3px;" href="index.php"
                             role="button">SEGUIR VIENDO PRODUCTOS</a>
                     </div>
                 </div>
@@ -62,7 +48,7 @@ $productos= json_decode($productosj,true);
                 <div class="card producto col-md-4">
                     <img src="images/productos/product-1.jpg" class="card-img-top" alt="Producto1">
                     <div class="card-body">
-                        <h3>$ 500</h3>
+                        <h3>$ 1490</h3>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
                     </div>
@@ -70,7 +56,7 @@ $productos= json_decode($productosj,true);
                 <div class="card producto col-md-4">
                     <img src="images/productos/product-2.jpg" class="card-img-top" alt="Producto1">
                     <div class="card-body">
-                        <h3>$ 500</h3>
+                        <h3>$ 1390</h3>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
                     </div>
@@ -78,7 +64,7 @@ $productos= json_decode($productosj,true);
                 <div class="card producto col-md-4">
                     <img src="images/productos/product-3.jpg" class="card-img-top" alt="Producto3">
                     <div class="card-body">
-                        <h3>$ 500</h3>
+                        <h3>$ 1290</h3>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
                     </div>
